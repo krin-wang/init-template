@@ -2,7 +2,7 @@
 
 A template with some pre-defined hooks.
 
-## Installation
+## Setup
 
 Install `pre-commit` to enable pre-commit hooks.
 
