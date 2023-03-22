@@ -6,7 +6,7 @@ repos:
     rev: v4.4.0
     hooks:
       - id: no-commit-to-branch
-        args: ['--branch', 'master']
+        args: ['--branch', 'master', '--branch', 'main']
       - id: detect-private-key
       - id: trailing-whitespace
       - id: end-of-file-fixer
