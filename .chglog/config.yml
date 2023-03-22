@@ -1,0 +1,35 @@
+style: github
+template: CHANGELOG.tpl.md
+info:
+  title: CHANGELOG
+  repository_url: https://github.com/krin-wang/docsify-template
+options:
+  tag_filter_pattern: '^\d'
+  commits:
+  # filters:
+  #   Type:
+  #     - feat
+  #     - fix
+  #     - perf
+  #     - refactor
+  commit_groups:
+    commit_groups:
+      group_by: Scope
+      sort_by: Scope
+    title_maps:
+      feat: Features
+      fix: Bug Fixes
+      docs: Documentation
+      refactor: Code Refactoring
+      perf: Performance Improvements
+      style: Code Style
+      test: Test
+  header:
+    pattern: "^(\\w*)(?:\\(([\\w\\$\\.\\-\\*\\s]*)\\))?\\:\\s(.*)$"
+    pattern_maps:
+      - Type
+      - Scope
+      - Subject
+  notes:
+    keywords:
+      - BREAKING CHANGE
