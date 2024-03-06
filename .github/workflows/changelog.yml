@@ -16,26 +16,25 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - run: |
           wget -O git-chglog.tar.gz \
           https://github.com/git-chglog/git-chglog/releases/download/v0.15.1/git-chglog_0.15.1_linux_amd64.tar.gz && \
           tar -xvf git-chglog.tar.gz git-chglog && \
           chmod 755 git-chglog
 
-          echo "CHANGELOG<<EOF" >> $GITHUB_ENV
-          CHANGES=$(./git-chglog --config .chglog/config.yml --next-tag Unreleased ${{ github.ref_name }})
-          echo "$CHANGES" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-
+          echo 'CHANGELOG<<EOF' >> $GITHUB_ENV
+          ./git-chglog --config .chglog/config.yml --next-tag Unreleased ${{ github.ref_name }} >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+      - name: get repository name
+        run: echo "REPOSITORY_NAME=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
       - name: Create release
         uses: actions/create-release@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          release_name: init-template ${{ github.ref }}
-          body: ${{ env.CHANGELOG }}
+          release_name: ${{ env.REPOSITORY_NAME }} ${{ github.ref }}
+          body: ${{ env.CHANGELOG }}git stat
